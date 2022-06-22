@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.coltec.todoapp.R;
+import edu.coltec.todoapp.bll.TaskBLL;
+import edu.coltec.todoapp.dao.AppDB;
 
 public class NewTaskActivity extends AppCompatActivity {
 
@@ -15,6 +18,8 @@ public class NewTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
 
+        AppDB appDB = new AppDB(this);
+
         EditText txtTaskName = this.findViewById(R.id.txt_task_name);
         EditText txtTaskDescription = this.findViewById(R.id.txt_task_description);
         Button btnNewTask = this.findViewById(R.id.btn_new_task);
@@ -22,6 +27,16 @@ public class NewTaskActivity extends AppCompatActivity {
         btnNewTask.setOnClickListener((view) -> {
             String taskName = txtTaskName.getText().toString();
             String taskDescription = txtTaskDescription.getText().toString();
+
+            TaskBLL taskBll = new TaskBLL(appDB);
+            boolean wasCreated = taskBll.create(taskName, taskDescription);
+
+            if (wasCreated) {
+                Toast.makeText(this, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show();
+                this.finish();
+            } else {
+                Toast.makeText(this, "Erro no cadastro da tarefa", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
