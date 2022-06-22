@@ -1,4 +1,4 @@
-package edu.coltec.todoapp;
+package edu.coltec.todoapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
