@@ -20,9 +20,9 @@ public class Task {
 
 
     public boolean isValid() {
-        if (this.name == null || this.name == "")
+        if (this.name == null || this.name.equals(""))
             return false;
-        if (this.description == null || this.description == "")
+        if (this.description == null || this.description.equals(""))
             return false;
 
         return true;
