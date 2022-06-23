@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AppDB extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "Todo.sqlite";
-    private static final int DB_VERSION = 2;
+    private static final String DB_NAME = "Todo2.sqlite";
+    private static final int DB_VERSION = 3;
 
     public AppDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -15,11 +15,13 @@ public class AppDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CategoryDAO.CREATE_SCRIPT);
         db.execSQL(TaskDAO.CREATE_SCRIPT);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(CategoryDAO.CREATE_SCRIPT);
         db.execSQL(TaskDAO.CREATE_SCRIPT);
     }
 }

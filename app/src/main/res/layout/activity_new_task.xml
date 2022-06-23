@@ -24,6 +24,13 @@
         android:layout_weight="1"
         android:id="@+id/txt_task_description" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Categoria"
+        android:id="@+id/txt_task_category"
+        android:layout_marginBottom="25dp"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

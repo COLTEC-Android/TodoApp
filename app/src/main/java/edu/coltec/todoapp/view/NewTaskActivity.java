@@ -22,14 +22,16 @@ public class NewTaskActivity extends AppCompatActivity {
 
         EditText txtTaskName = this.findViewById(R.id.txt_task_name);
         EditText txtTaskDescription = this.findViewById(R.id.txt_task_description);
+        EditText txtTaskCategory = this.findViewById(R.id.txt_task_category);
         Button btnNewTask = this.findViewById(R.id.btn_new_task);
 
         btnNewTask.setOnClickListener((view) -> {
             String taskName = txtTaskName.getText().toString();
             String taskDescription = txtTaskDescription.getText().toString();
+            String taskCategory = txtTaskCategory.getText().toString();
 
             TaskBLL taskBll = new TaskBLL(appDB);
-            boolean wasCreated = taskBll.create(taskName, taskDescription);
+            boolean wasCreated = taskBll.create(taskName, taskDescription, taskCategory);
 
             if (wasCreated) {
                 Toast.makeText(this, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show();

@@ -5,17 +5,20 @@ public class Task {
     private Integer id;
     private String name;
     private String description;
+    private Category category;
 
 
-    public Task(Integer id, String name, String description) {
+    public Task(Integer id, String name, String description, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
     }
 
-    public Task(String name, String description) {
+    public Task(String name, String description, Category category) {
         this.name = name;
         this.description = description;
+        this.category = category;
     }
 
 
@@ -23,6 +26,8 @@ public class Task {
         if (this.name == null || this.name.equals(""))
             return false;
         if (this.description == null || this.description.equals(""))
+            return false;
+        if (!this.category.isValid())
             return false;
 
         return true;
@@ -43,5 +48,21 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
