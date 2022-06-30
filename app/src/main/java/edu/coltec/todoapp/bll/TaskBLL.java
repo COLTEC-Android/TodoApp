@@ -2,6 +2,9 @@ package edu.coltec.todoapp.bll;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.coltec.todoapp.dao.AppDB;
 import edu.coltec.todoapp.dao.Category;
 import edu.coltec.todoapp.dao.CategoryDAO;
@@ -39,4 +42,11 @@ public class TaskBLL {
         return result;
     }
 
+    public List<Task> getAll() {
+        List<Task> tasks = new ArrayList<>();
+
+
+
+        return tasks;
+    }
 }
