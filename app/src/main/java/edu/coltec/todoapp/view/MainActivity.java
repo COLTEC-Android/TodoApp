@@ -14,19 +14,30 @@ import edu.coltec.todoapp.dao.Task;
 
 public class MainActivity extends AppCompatActivity {
 
+    TasksListAdapter listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ListView tasksList = this.findViewById(R.id.tasks_list);
-        TasksListAdapter adapter = new TasksListAdapter(this);
-        tasksList.setAdapter(adapter);
+        listAdapter = new TasksListAdapter(this);
+        tasksList.setAdapter(listAdapter);
 
         Button btnAddTask = this.findViewById(R.id.btn_add_task);
         btnAddTask.setOnClickListener((view) -> {
             Intent newTaskIntent = new Intent(MainActivity.this, NewTaskActivity.class);
             startActivity(newTaskIntent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // força atualização da lista após cadastro de nova tarefa
+        listAdapter.updateList();
+        listAdapter.notifyDataSetChanged();
     }
 }

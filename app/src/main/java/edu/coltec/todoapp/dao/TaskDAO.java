@@ -5,6 +5,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskDAO {
 
     public static final String CREATE_SCRIPT =
@@ -80,5 +83,33 @@ public class TaskDAO {
         }
 
         return  searchedTask;
+    }
+
+    @SuppressLint("Range")
+    public List<Task> getAll() {
+        List<Task> tasks = new ArrayList<>();
+        CategoryDAO categoryDAO = new CategoryDAO(this.appDB);
+        SQLiteDatabase readDB = this.appDB.getReadableDatabase();
+
+        try {
+            Cursor res = readDB.query(TABLE_NAME, null, null, null, null, null, null);
+            if (res.moveToFirst()) {
+                do {
+                    int id = res.getInt(res.getColumnIndex(ID_COLUMN));
+                    String name = res.getString(res.getColumnIndex(NAME_COLUMN));
+                    String description = res.getString(res.getColumnIndex(DESCRIPTION_COLUMN));
+
+                    int categoryId = res.getInt(res.getColumnIndex(CATEGORY_COLUMN));
+                    Category category = categoryDAO.getById(new Category(categoryId));
+
+                    tasks.add(new Task(id, name, description, category));
+                } while (res.moveToNext());
+            }
+        } catch(Exception e) {
+            tasks = null;
+        } finally {
+            readDB.close();
+        }
+        return tasks;
     }
 }

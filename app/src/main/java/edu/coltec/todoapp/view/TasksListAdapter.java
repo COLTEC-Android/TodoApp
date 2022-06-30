@@ -55,4 +55,10 @@ public class TasksListAdapter extends BaseAdapter {
 
         return taskView;
     }
+
+    public void updateList() {
+        AppDB appDB = new AppDB(context);
+        TaskBLL taskBLL = new TaskBLL(appDB);
+        this.tasks = taskBLL.getAll();
+    }
 }

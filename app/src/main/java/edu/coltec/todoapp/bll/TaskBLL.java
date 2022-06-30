@@ -43,9 +43,10 @@ public class TaskBLL {
     }
 
     public List<Task> getAll() {
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks;
 
-
+        TaskDAO taskDAO = new TaskDAO(this.appDB);
+        tasks = taskDAO.getAll();
 
         return tasks;
     }
